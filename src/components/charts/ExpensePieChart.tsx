@@ -21,11 +21,9 @@ export default function CustomActiveShapePieChart({ isAnimationActive = true, de
     }
 
     const colorText = (index: number) => {
-        for (let i = 0; i < data.length; i++) {
-            const baseHue = 160
-            const hueOffset = index * (360 / dataCount)
-            return `hsl(${(baseHue + hueOffset) % 360}, 75%, 41%)`
-        }
+        const baseHue = 160
+        const hueOffset = index * (360 / dataCount)
+        return `hsl(${(baseHue + hueOffset) % 360}, 75%, 41%)`
     }
 
     const dataCount = data.length
@@ -48,7 +46,6 @@ export default function CustomActiveShapePieChart({ isAnimationActive = true, de
         <div className='expenses_category'>
             <PieChart
                 style={{ width: "130px", height: "130px", maxWidth: "500px", maxHeight: "80vh", aspectRatio: 1, fontSize: "10px" }}
-                // style={{ width: "100%", maxWidth: "500px", maxHeight: "80vh", aspectRatio: 1 }}
                 responsive
                 margin={{
                     top: 0,
