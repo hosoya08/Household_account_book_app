@@ -1,12 +1,14 @@
 import { Pie, PieChart, Label, Tooltip, Sector } from "recharts"
 import type { TooltipIndex, PieSectorShapeProps } from "recharts"
+import type { Expense } from "../../types/expense"
+import { CATEGORY_CONFIG } from "../../types/expense"
+// import { CATEGORY_COLORS } from "../../utils/categoryColors";
 
 export default function CustomActiveShapePieChart({ isAnimationActive = true, defaultIndex = undefined }: { isAnimationActive?: boolean; defaultIndex?: TooltipIndex }) {
-    const data = [
+    const data:Expense[] = [
         { id: 1, title: "食費", amount: 3200, category: "food", date: "2026-08-30", memo: "夕食の買い物", createdAt: "2026-08-30T08:30:00.000Z" },
         { id: 2, title: "娯楽", amount: 4000, category: "entertainment", date: "2026-08-30", memo: "夕食の買い物", createdAt: "2026-08-30T08:30:00.000Z" },
         { id: 3, title: "交通", amount: 2100, category: "transport", date: "2026-08-30", memo: "夕食の買い物", createdAt: "2026-08-30T08:30:00.000Z" },
-        { id: 4, title: "日用", amount: 1500, category: "daily", date: "2026-08-30", memo: "夕食の買い物", createdAt: "2026-08-30T08:30:00.000Z" },
     ]
 
     // dataのAmountの合計値を計算
@@ -16,14 +18,8 @@ export default function CustomActiveShapePieChart({ isAnimationActive = true, de
     }
     const percent = (index: number) => {
         for (let i = 0; i < data.length; i++) {
-            return data[index].title + "：" + Math.floor((data[index].amount / totalAmount) * 100)
+            return Math.floor((data[index].amount / totalAmount) * 100)
         }
-    }
-
-    const colorText = (index: number) => {
-        const baseHue = 160
-        const hueOffset = index * (360 / dataCount)
-        return `hsl(${(baseHue + hueOffset) % 360}, 75%, 41%)`
     }
 
     const dataCount = data.length
@@ -40,6 +36,7 @@ export default function CustomActiveShapePieChart({ isAnimationActive = true, de
         // 従来のCellの代わりに、Sectorコンポーネントに直接fill（色）を渡す
         return <Sector {...props} fill={dynamicColor} />
     }
+
 
     const chartName = "¥82,450"
     return (
@@ -80,10 +77,10 @@ export default function CustomActiveShapePieChart({ isAnimationActive = true, de
                 />
             </PieChart>
             <ul className='chart-category_content'>
-                {data.map((item, index) => (
-                    <li className='chart-category-list' key={index}>
-                        <div className='disc' style={{ background: colorText(index) }}></div>
-                        {item.title}({percent(index) + "%"})
+                {data.map((item) => (
+                    <li className='chart-category-list' key={item.id - 1}>
+                        <div className='disc' style={{ background:  CATEGORY_CONFIG[item.category].color}}></div>
+                        {item.title}({percent(item.id - 1) + "%"})
                     </li>
                 ))}
             </ul>
