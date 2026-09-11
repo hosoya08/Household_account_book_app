@@ -19,11 +19,11 @@ export const CATEGORY_CONFIG = {
     },
     transport: {
         label: "交通費",
-        color: "hsl(340, 75%, 41%)"
+        color: "hsl(340, 43%, 72%)"
     },
     daily: {
         label: "日用品",
-        color: "hsl(70, 75%, 41%)"
+        color: "hsl(70, 100%, 60%)"
     }
 }
 
