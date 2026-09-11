@@ -226,3 +226,7 @@ h1 {
     font-weight: bold;
     color: var(--color-deep-black);
 }
+.expense-memo {
+    overflow-y: scroll;
+    max-height: 100%;
+}
